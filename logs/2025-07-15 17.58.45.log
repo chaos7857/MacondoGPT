@@ -1,0 +1,25 @@
+2025-07-15 17:58:45,394 - DEBUG - 日志配置完毕
+2025-07-15 17:58:45,394 - DEBUG - ============================================================
+2025-07-15 17:58:48,469 - INFO - tokens per iteration will be: 491,520
+2025-07-15 17:58:48,476 - INFO - found vocab_size = 3075 (inside data\meta.pkl)
+2025-07-15 17:58:48,476 - INFO - Initializing a new model from scratch
+2025-07-15 17:59:28,274 - INFO - step 0: train loss 8.1719, val loss 8.1681
+2025-07-15 17:59:39,646 - INFO - iter 0: loss 8.1662, time 50293.10ms, mfu -100.00%
+2025-07-15 17:59:50,994 - INFO - iter 1: loss 8.1486, time 11343.85ms, mfu -100.00%
+2025-07-15 18:00:02,468 - INFO - iter 2: loss 8.1242, time 11475.70ms, mfu -100.00%
+2025-07-15 18:00:13,907 - INFO - iter 3: loss 8.0584, time 11437.67ms, mfu -100.00%
+2025-07-15 18:00:25,394 - INFO - iter 4: loss 8.0027, time 11486.49ms, mfu -100.00%
+2025-07-15 18:00:36,916 - INFO - iter 5: loss 7.9116, time 11521.92ms, mfu 130.67%
+2025-07-15 18:00:48,393 - INFO - iter 6: loss 7.8462, time 11478.21ms, mfu 130.72%
+2025-07-15 18:00:59,825 - INFO - iter 7: loss 7.7393, time 11432.06ms, mfu 130.82%
+2025-07-15 18:01:11,191 - INFO - iter 8: loss 7.6819, time 11367.39ms, mfu 130.98%
+2025-07-15 18:01:22,566 - INFO - iter 9: loss 7.5795, time 11374.24ms, mfu 131.12%
+2025-07-15 18:01:33,961 - INFO - iter 10: loss 7.5449, time 11393.33ms, mfu 131.23%
+2025-07-15 18:01:45,399 - INFO - iter 11: loss 7.4476, time 11438.27ms, mfu 131.27%
+2025-07-15 18:01:56,878 - INFO - iter 12: loss 7.4039, time 11479.43ms, mfu 131.25%
+2025-07-15 18:02:08,342 - INFO - iter 13: loss 7.3501, time 11464.50ms, mfu 131.26%
+2025-07-15 18:02:19,753 - INFO - iter 14: loss 7.2961, time 11410.39ms, mfu 131.33%
+2025-07-15 18:02:31,229 - INFO - iter 15: loss 7.2249, time 11475.68ms, mfu 131.32%
+2025-07-15 18:02:42,642 - INFO - iter 16: loss 7.2269, time 11413.43ms, mfu 131.38%
+2025-07-15 18:02:54,062 - INFO - iter 17: loss 7.1774, time 11420.62ms, mfu 131.42%
+2025-07-15 18:03:05,463 - INFO - iter 18: loss 7.1426, time 11399.85ms, mfu 131.49%

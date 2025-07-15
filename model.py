@@ -299,8 +299,68 @@ class GPT(nn.Module):
         # express our flops throughput as ratio of A100 bfloat16 peak flops
         flops_achieved = flops_per_iter * (1.0/dt) # per second
         flops_promised = 312e12 # A100 GPU bfloat16 peak flops is 312 TFLOPS
+        ###############################################################################
+        '''
+        我用的是4060Ti 这里峰值需要调整
+        修改前为8%，理论上，修改后会变成130%左右，这是不合理的
+        '''
+        # flops_promised = 20.8e12 
+        ###############################################################################
         mfu = flops_achieved / flops_promised
         return mfu
+    
+    def my_estimate_mfu(self, fwdbwd_per_iter, dt, batch_size, gpu_type='4060ti'):
+        """
+        估算模型浮点运算利用率 (MFU)，考虑不同GPU的实际性能特性
+        
+        参数:
+        - fwdbwd_per_iter: 每次迭代的前向+反向传播次数
+        - dt: 迭代时间 (秒)
+        - gpu_type: GPU型号，支持 '4060ti', 'a100', 'v100' 等
+        """
+        # 获取模型参数量和配置
+        N = self.get_num_params()
+        cfg = self.config
+        L, H, Q, T = cfg.n_layer, cfg.n_head, cfg.n_embd//cfg.n_head, cfg.block_size
+        
+        # 计算理论FLOPs
+        flops_per_token = 6*N + 12*L*H*Q*T  # 理论FLOPs计算公式
+        flops_per_fwdbwd = flops_per_token * T
+        flops_per_iter = flops_per_fwdbwd * fwdbwd_per_iter
+        
+        # 不同GPU的硬件参数 (TFLOPS和GB/s)
+        gpu_specs = {
+            '4060ti': {'bf16_flops': 20.8, 'memory_bandwidth': 288, 'compute_efficiency': 0.6},
+            'a100':   {'bf16_flops': 312,  'memory_bandwidth': 2039, 'compute_efficiency': 0.85},
+            'v100':   {'bf16_flops': 78,   'memory_bandwidth': 900,  'compute_efficiency': 0.75},
+        }
+        
+        # 获取对应GPU的参数
+        specs = gpu_specs.get(gpu_type, gpu_specs['4060ti'])
+        
+        # 计算实际达到的FLOPs
+        flops_achieved = flops_per_iter * (1.0/dt)  # 每秒FLOPs
+        
+        # 计算理论峰值FLOPs，考虑硬件实际效率上限
+        peak_flops = specs['bf16_flops'] * 1e12 * specs['compute_efficiency']
+        
+        # 计算计算单元MFU
+        compute_mfu = min(flops_achieved / peak_flops, 1.0)
+        
+        # 估算内存访问量 (简化计算，实际情况更复杂)
+        # 这里假设每个参数和激活值在每次迭代中被访问一次
+        memory_accessed = (N + batch_size * T * cfg.n_embd) * 2  # 前向+反向
+        memory_accessed_per_iter = memory_accessed * fwdbwd_per_iter
+        memory_bandwidth_used = memory_accessed_per_iter * (1.0/dt) / (1024**3)  # GB/s
+        
+        # 计算内存带宽MFU
+        memory_mfu = min(memory_bandwidth_used / specs['memory_bandwidth'], 1.0)
+        
+        return {
+            'compute_mfu': compute_mfu,
+            'memory_mfu': memory_mfu,
+            'bottleneck': 'compute' if compute_mfu < memory_mfu else 'memory'
+        }
 
     @torch.no_grad()
     def generate(self, idx, max_new_tokens, temperature=1.0, top_k=None):

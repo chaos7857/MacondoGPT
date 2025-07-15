@@ -1,0 +1,24 @@
+2025-07-15 18:22:56,844 - DEBUG - 日志配置完毕
+2025-07-15 18:22:56,844 - DEBUG - ============================================================
+2025-07-15 18:22:58,134 - INFO - tokens per iteration will be: 491,520
+2025-07-15 18:22:58,135 - INFO - found vocab_size = 3075 (inside data\meta.pkl)
+2025-07-15 18:22:58,136 - INFO - Initializing a new model from scratch
+2025-07-15 18:23:37,614 - INFO - step 0: train loss 8.1719, val loss 8.1681
+2025-07-15 18:23:49,007 - INFO - iter 0: loss 8.1662, time 50024.29ms, mfu -100.00%， memory_mfu -100.00%, bottleneck: compute
+2025-07-15 18:24:00,355 - INFO - iter 1: loss 8.1486, time 11346.27ms, mfu -100.00%， memory_mfu -100.00%, bottleneck: compute
+2025-07-15 18:24:11,703 - INFO - iter 2: loss 8.1242, time 11347.46ms, mfu -100.00%， memory_mfu -100.00%, bottleneck: compute
+2025-07-15 18:24:23,051 - INFO - iter 3: loss 8.0584, time 11347.22ms, mfu -100.00%， memory_mfu -100.00%, bottleneck: compute
+2025-07-15 18:24:34,403 - INFO - iter 4: loss 8.0027, time 11353.03ms, mfu -100.00%， memory_mfu -100.00%, bottleneck: compute
+2025-07-15 18:24:45,754 - INFO - iter 5: loss 7.9116, time 11349.01ms, mfu 100.00%， memory_mfu 2.65%, bottleneck: memory
+2025-07-15 18:24:57,179 - INFO - iter 6: loss 7.8462, time 11425.15ms, mfu 100.00%， memory_mfu 2.63%, bottleneck: memory
+2025-07-15 18:25:08,584 - INFO - iter 7: loss 7.7393, time 11404.68ms, mfu 100.00%， memory_mfu 2.63%, bottleneck: memory
+2025-07-15 18:25:20,039 - INFO - iter 8: loss 7.6819, time 11455.87ms, mfu 100.00%， memory_mfu 2.62%, bottleneck: memory
+2025-07-15 18:25:31,480 - INFO - iter 9: loss 7.5795, time 11441.16ms, mfu 100.00%， memory_mfu 2.63%, bottleneck: memory
+2025-07-15 18:25:42,890 - INFO - iter 10: loss 7.5449, time 11410.32ms, mfu 100.00%， memory_mfu 2.63%, bottleneck: memory
+2025-07-15 18:25:54,307 - INFO - iter 11: loss 7.4476, time 11415.82ms, mfu 100.00%， memory_mfu 2.63%, bottleneck: memory
+2025-07-15 18:26:05,744 - INFO - iter 12: loss 7.4039, time 11438.11ms, mfu 100.00%， memory_mfu 2.63%, bottleneck: memory
+2025-07-15 18:26:17,160 - INFO - iter 13: loss 7.3501, time 11415.80ms, mfu 100.00%， memory_mfu 2.63%, bottleneck: memory
+2025-07-15 18:26:28,581 - INFO - iter 14: loss 7.2961, time 11421.09ms, mfu 100.00%， memory_mfu 2.63%, bottleneck: memory
+2025-07-15 18:26:39,985 - INFO - iter 15: loss 7.2249, time 11404.06ms, mfu 100.00%， memory_mfu 2.63%, bottleneck: memory
+2025-07-15 18:26:51,443 - INFO - iter 16: loss 7.2269, time 11459.42ms, mfu 100.00%， memory_mfu 2.62%, bottleneck: memory
+2025-07-15 18:27:02,843 - INFO - iter 17: loss 7.1774, time 11397.54ms, mfu 100.00%， memory_mfu 2.64%, bottleneck: memory

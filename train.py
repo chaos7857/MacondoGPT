@@ -1,4 +1,13 @@
 """
+
+ __  __                           _        ____ ____ _____ 
+|  \/  | __ _  ___ ___  _ __   __| | ___  / ___|  _ \_   _|
+| |\/| |/ _` |/ __/ _ \| '_ \ / _` |/ _ \| |  _| |_) || |  
+| |  | | (_| | (_| (_) | | | | (_| | (_) | |_| |  __/ | |  
+|_|  |_|\__,_|\___\___/|_| |_|\__,_|\___/ \____|_|    |_|  
+
+
+                                                           
 This training script can be run both on a single gpu in debug mode,
 and also in a larger training run with distributed data parallel (ddp).
 
@@ -56,7 +65,7 @@ log_interval = 1
 eval_iters = 200
 eval_only = False # if True, script exits right after the first eval
 always_save_checkpoint = True # if True, always save a checkpoint after each eval
-init_from = 'scratch' # 'scratch' or 'resume' or 'gpt2*'
+init_from = 'resume' # 'scratch' or 'resume' or 'gpt2*'
 # wandb logging
 wandb_log = False # disabled by default
 wandb_project = 'owt'

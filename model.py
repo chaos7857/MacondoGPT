@@ -27,7 +27,7 @@ class LayerNorm(nn.Module):
         return F.layer_norm(input, self.weight.shape, self.weight, self.bias, 1e-5)
 
 class CausalSelfAttention(nn.Module):
-
+    '''因果注意力'''
     def __init__(self, config):
         super().__init__()
         assert config.n_embd % config.n_head == 0
@@ -64,15 +64,15 @@ class CausalSelfAttention(nn.Module):
             y = torch.nn.functional.scaled_dot_product_attention(q, k, v, attn_mask=None, dropout_p=self.dropout if self.training else 0, is_causal=True)
         else:
             # manual implementation of attention
-            att = (q @ k.transpose(-2, -1)) * (1.0 / math.sqrt(k.size(-1)))
-            att = att.masked_fill(self.bias[:,:,:T,:T] == 0, float('-inf'))
-            att = F.softmax(att, dim=-1)
-            att = self.attn_dropout(att)
+            att = (q @ k.transpose(-2, -1)) * (1.0 / math.sqrt(k.size(-1)))# *(1/hs)，单头的维度
+            att = att.masked_fill(self.bias[:,:,:T,:T] == 0, float('-inf'))# 把0的地方变成负无穷，这样softmax会变成0
+            att = F.softmax(att, dim=-1)# 在最后一个维度执行
+            att = self.attn_dropout(att)#这个的作用是序列间
             y = att @ v # (B, nh, T, T) x (B, nh, T, hs) -> (B, nh, T, hs)
-        y = y.transpose(1, 2).contiguous().view(B, T, C) # re-assemble all head outputs side by side
+        y = y.transpose(1, 2).contiguous().view(B, T, C) # re-assemble all head outputs side by side #view()、reshape() 等操作要求张量的内存布局必须是连续的。
 
         # output projection
-        y = self.resid_dropout(self.c_proj(y))
+        y = self.resid_dropout(self.c_proj(y))#这里是特征间
         return y
 
 class MLP(nn.Module):
